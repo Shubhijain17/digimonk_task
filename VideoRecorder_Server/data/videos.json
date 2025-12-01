@@ -1,0 +1,29 @@
+{
+  "videos": [
+    {
+      "id": 1,
+      "title": "Recording 29/11/2025, 16:03:23",
+      "description": "",
+      "videoUrl": "/api/videos/file/recording-1764412403542-1764412403581-459896926.webm",
+      "filename": "recording-1764412403542-1764412403581-459896926.webm",
+      "duration": 0,
+      "uploadedBy": 2,
+      "uploadedByUsername": "user1",
+      "timestamp": "2025-11-29T10:33:23.608Z",
+      "createdAt": "2025-11-29T10:33:23.608Z"
+    },
+    {
+      "id": 2,
+      "title": "le",
+      "description": "",
+      "videoUrl": "/api/videos/file/recording-1764412440559-1764412440628-988449429.webm",
+      "filename": "recording-1764412440559-1764412440628-988449429.webm",
+      "duration": 0,
+      "uploadedBy": 1,
+      "uploadedByUsername": "admin",
+      "timestamp": "2025-11-29T10:34:00.660Z",
+      "createdAt": "2025-11-29T10:34:00.660Z"
+    }
+  ],
+  "nextId": 3
+}
