@@ -266,7 +266,8 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
           
           {hasPermission === null && (
             <div className="absolute inset-0 flex items-center justify-center text-white">
-              <p>Click "Start Camera" to begin</p>
+              {/* <p>Click "Start Camera" to begin</p> */}
+              <p>Click &quot;Start Camera&quot; to begin</p>
             </div>
           )}
 
