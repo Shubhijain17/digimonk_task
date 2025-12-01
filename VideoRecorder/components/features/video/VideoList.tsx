@@ -25,7 +25,6 @@ export function VideoList({ onRefresh }: VideoListProps) {
       setError(null)
       const response = await api.getVideos()
       if (response.status === 'success' && response.data) {
-        // Backend returns array directly in data field
         setVideos(Array.isArray(response.data) ? response.data : [])
       }
     } catch (err: any) {

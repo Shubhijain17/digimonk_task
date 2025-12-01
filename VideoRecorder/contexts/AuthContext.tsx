@@ -26,7 +26,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  // Check for existing auth on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedToken = localStorage.getItem('token')
@@ -47,7 +46,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (response.status === 'success' && response.data) {
         const { token: newToken, user: newUser } = response.data
         
-        // Store in localStorage
         if (typeof window !== 'undefined') {
           localStorage.setItem('token', newToken)
           localStorage.setItem('user', JSON.stringify(newUser))

@@ -25,7 +25,6 @@ function DashboardContent() {
       setLoading(true)
       const videosData = await api.getVideos()
       if (videosData.status === 'success' && videosData.data) {
-        // Backend returns array directly in data field
         setVideos(Array.isArray(videosData.data) ? videosData.data : [])
       }
       setError(null)
@@ -43,7 +42,7 @@ function DashboardContent() {
 
   const handleRecordingComplete = () => {
     setShowRecorder(false)
-    fetchVideos() // Refresh video list
+    fetchVideos() 
   }
 
   const formatFileSize = (bytes: number) => {
@@ -59,7 +58,7 @@ function DashboardContent() {
 
     try {
       await api.deleteVideo(id)
-      fetchVideos() // Refresh list
+      fetchVideos() 
     } catch (err: any) {
       alert(err.response?.data?.message || 'Failed to delete video')
     }
@@ -72,7 +71,6 @@ function DashboardContent() {
 
   return (
     <main className="min-h-screen bg-gray-50/50">
-      {/* Header */}
       <header className="bg-white border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -110,14 +108,13 @@ function DashboardContent() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Video Recorder */}
+       
         {showRecorder && (
           <div className="mb-6">
             <VideoRecorder onRecordingComplete={handleRecordingComplete} />
           </div>
         )}
 
-        {/* Videos Section */}
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">
@@ -195,7 +192,6 @@ function DashboardContent() {
                       )}
                     </div>
 
-                    {/* Video Info */}
                     <CardContent className="p-4 flex-1 flex flex-col bg-white">
                       <h3 className="font-semibold text-sm mb-2 line-clamp-2 text-gray-900">
                         {video.title || video.originalName || 'Untitled Video'}

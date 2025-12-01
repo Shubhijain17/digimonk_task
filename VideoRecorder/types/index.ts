@@ -1,5 +1,3 @@
-// Shared types for the application
-
 export interface User {
   id: number;
   username: string;

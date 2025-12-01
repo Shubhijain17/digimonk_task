@@ -1,8 +1,6 @@
 import { apiClient } from './client';
 
-// API endpoints
 export const api = {
-  // Auth endpoints
   login: async (username: string, password: string) => {
     const response = await apiClient.post('/api/auth/login', {
       username,
@@ -16,13 +14,11 @@ export const api = {
     return response.data;
   },
 
-  // Health check
   healthCheck: async () => {
     const response = await apiClient.get('/api/health');
     return response.data;
   },
 
-  // Video endpoints
   getVideos: async () => {
     const response = await apiClient.get('/api/videos');
     return response.data;

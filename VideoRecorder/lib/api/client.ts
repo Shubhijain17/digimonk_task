@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// Backend API base URL
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
-// Create axios instance with default config
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -11,7 +9,6 @@ export const apiClient = axios.create({
   },
 });
 
-// Add token to requests if available
 apiClient.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
@@ -27,7 +24,6 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Handle 401 errors (unauthorized)
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {

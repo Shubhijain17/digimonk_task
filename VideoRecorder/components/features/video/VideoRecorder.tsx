@@ -45,7 +45,6 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
   // Check for multiple cameras
   const checkAvailableCameras = async () => {
     try {
-      // Check if device is mobile (re-check in case state wasn't set)
       const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera
       const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase()) ||
         (window.innerWidth <= 768 && window.innerHeight <= 1024)
@@ -53,7 +52,6 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
       const devices = await navigator.mediaDevices.enumerateDevices()
       const videoDevices = devices.filter(device => device.kind === 'videoinput')
       
-      // On mobile, check if we have multiple cameras
       if (isMobileDevice) {
         // Check if we have both front and back cameras
         const hasFront = videoDevices.some(device => 
@@ -70,7 +68,6 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
         // Enable switch if we have multiple cameras or more than one device
         setHasMultipleCameras(hasFront && hasBack || videoDevices.length > 1)
       } else {
-        // On desktop/laptop, disable switch
         setHasMultipleCameras(false)
       }
     } catch (error) {
@@ -79,7 +76,6 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
     }
   }
 
-  // Request camera permission and start stream
   const startCamera = async () => {
     try {
       setHasPermission(null)
@@ -102,7 +98,6 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
       
       setHasPermission(true)
       
-      // Check for available cameras after permission is granted
       await checkAvailableCameras()
     } catch (error: any) {
       console.error('Error accessing camera:', error)
@@ -117,7 +112,6 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
     }
   }
 
-  // Stop camera stream
   const stopCamera = () => {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => track.stop())
@@ -128,17 +122,14 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
     }
   }
 
-  // Switch camera
   const switchCamera = async () => {
     stopCamera()
     setFacingMode(prev => prev === 'user' ? 'environment' : 'user')
-    // Wait a bit before starting new stream
     setTimeout(() => {
       startCamera()
     }, 100)
   }
 
-  // Start recording
   const startRecording = () => {
     if (!streamRef.current) {
       alert('Please start camera first')
@@ -177,7 +168,6 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
         setRecordingTime(prev => prev + 1)
       }, 1000)
 
-      // Store timer to clear it later
       ;(mediaRecorder as any).timer = timer
     } catch (error: any) {
       console.error('Error starting recording:', error)
@@ -185,13 +175,11 @@ export function VideoRecorder({ onRecordingComplete }: VideoRecorderProps) {
     }
   }
 
-  // Stop recording
   const stopRecording = () => {
     if (mediaRecorderRef.current && isRecording) {
       mediaRecorderRef.current.stop()
       setIsRecording(false)
       
-      // Clear timer
       if ((mediaRecorderRef.current as any).timer) {
         clearInterval((mediaRecorderRef.current as any).timer)
       }
